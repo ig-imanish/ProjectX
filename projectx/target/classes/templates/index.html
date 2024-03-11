@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="" th:href="@{/css/style.css}" />
+
+    <title>Home</title>
+</head>
+<body class="banner">
+<div class="container">
+  <div th:replace="~{fragments/base :: navbar}"></div>
+
+    <div class="row">
+        <div class="col">
+            <!-- Check if there are posts available -->
+            <div th:if="${#lists.isEmpty(posts)}">
+                <!-- Default card -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">No posts available</h5>
+                        <p class="card-text">Start following users to see posts.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- If there are posts, iterate over them -->
+            <div th:unless="${#lists.isEmpty(posts)}">
+                <div th:each="post : ${posts}">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <!-- Make sure to use proper Thymeleaf expressions to access post attributes -->
+                            <!-- <img th:src="${post.user.logoUrl}" class="rounded-circle" alt="User Logo" width="50"
+                                 height="50"/> -->
+                            <!-- Assuming user.nickname is a valid attribute -->
+                            <h5 class="card-title" th:text="${post.user.getNickname}">User Nickname</h5>
+                            <!-- Assuming post.content is a valid attribute -->
+                            <p class="card-text" th:text="${post.getContent}">Post Content</p>
+                            <p class="card-text">
+                                <small class="text-muted">Last updated 3 mins ago</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Check for success message and display it -->
+      <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}"></p>
+      </div>
+</div>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-GDgcgBvmKCUpkXAd3QgSt42Feg6zboz5rJzcqpK9ftDIeBv9LCTdZOCaTxKtsaKg"
+        crossorigin="anonymous"></script>
+</body>
+</html>

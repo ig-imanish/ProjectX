@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.banner{
+    background-image: linear-gradient(rgba(0,0,0, .8),rgba(0,0,0,.8)), url(../img/bg2.jpeg);
+    background-size: cover;
+}
+
+.navbar{
+    border-radius: 10px;
+}
+
+/* .card{
+
+}
+
+.card img{
+    height: 220px;
+    width: 518px;
+} */
+
+.card {
+    width: 558px; /* Set width to match the image width */
+}
+.card img{
+    height: 220px;
+    width: 518px;
+    margin: 20px;
+} 

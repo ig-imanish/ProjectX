@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "post_db")
@@ -18,6 +19,7 @@ public class Post {
     private Long id;
 
     @Lob
+    @Size(max = 5000 , message = "Content length must be less than or equal to 2000 characters")
     private String content;
 
     @ManyToOne
@@ -53,7 +55,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post [id=" + id + ", content=" + content + ", user=" + user + "]";
+        return "Post [id=" + id + ", content length=" + content.length() + ", user=" + user + "]";
     }
 
     

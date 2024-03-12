@@ -42,7 +42,7 @@ public class MainController {
     User user = (User) session.getAttribute("user");
 
     if (user != null) {
-        return "index";
+        return "/auth/index";
     }
     return "redirect:/login";
     }
@@ -72,7 +72,7 @@ public class MainController {
             return "redirect:/index";
         }
         model.addAttribute("user", new User());
-        return "login";
+        return "/auth/login";
     }
 
     @PostMapping("/login")
@@ -93,7 +93,7 @@ public class MainController {
         if (session.getAttribute("user") == null) {
             return "redirect:/login";
         }
-        return "logout";
+        return "/auth/logout";
     }
 
     @PostMapping("/logout")
@@ -109,7 +109,7 @@ public class MainController {
             return "redirect:/index"; // Redirect to the index page if user is already logged in
         }
         model.addAttribute("user", new User());
-        return "signup";
+        return "/auth/signup";
     }
 
     @PostMapping("/do_register")
@@ -119,16 +119,16 @@ public class MainController {
             HttpSession session) {
         if (user.getEmail().isEmpty()) {
             model.addAttribute("noEmailMessage", message.noFieldProvided("email"));
-            return "signup";
+            return "/auth/signup";
         }
         if (user.getPassword().isEmpty()) {
             model.addAttribute("noPasswordMessage", message.noFieldProvided("password"));
-            return "signup";
+            return "/auth/signup";
         }
         // Validate form fields
         if (bindingResult.hasErrors()) {
             // Handle validation errors
-            return "signup";
+            return "/auth/signup";
         }
 
         System.out.println("main " + user);

@@ -24,6 +24,7 @@ public class AuthController {
 
     @GetMapping("/user")
     public String signup(Model model, HttpSession session) {
+        System.out.println("\n\n\nAuthController - / user\n\n\n");
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login"; // Redirect to login if user not logged in

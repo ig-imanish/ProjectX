@@ -7,14 +7,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "user_db")
 public class User {
 
     @Id
+    @Email(message = "Enter a valid email!")
     private String email;
-    private String nickname;    
+    @Size(min = 3, max = 15, message = "Please Enter Name Of 3-15 Size!")
+    private String nickname;
+    @NotBlank(message = "Provide a password")    
     private String password;
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Post> posts;

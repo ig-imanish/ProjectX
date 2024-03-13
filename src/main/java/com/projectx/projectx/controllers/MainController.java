@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.projectx.projectx.dao.PostRepo;
 import com.projectx.projectx.entities.Post;
 import com.projectx.projectx.entities.User;
 import com.projectx.projectx.helpers.Message;
 import com.projectx.projectx.helpers.MethodsForGen;
 import com.projectx.projectx.services.UserService;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -39,17 +37,18 @@ public class MainController {
 
     @GetMapping("/")
     public String home(HttpSession session) {
-    User user = (User) session.getAttribute("user");
+        System.out.println("\n\n\nMainController - GetMapping - / \n\n\n");
+        User user = (User) session.getAttribute("user");
 
-    if (user != null) {
-        return "/auth/index";
+        if (user != null) {
+            return "/auth/index";
+        }
+        return "redirect:/login";
     }
-    return "redirect:/login";
-    }
-
 
     @GetMapping("/index")
-    public String index(HttpSession session , Model model) {
+    public String index(HttpSession session, Model model) {
+        System.out.println("\n\n\nMainController - GetMapping - / index\n\n\n");
         User user = (User) session.getAttribute("user");
         if (user != null) {
             // If the user is logged in, fetch posts from the repository
@@ -66,6 +65,7 @@ public class MainController {
 
     @RequestMapping("/login")
     public String login(Model model, HttpSession session) {
+        System.out.println("\n\n\nMainController - RequestMapping - / login\n\n\n");
         User user = (User) session.getAttribute("user");
         if (user != null) {
             model.addAttribute("user", user);
@@ -79,10 +79,11 @@ public class MainController {
     public String loginUser(@RequestParam("email") String email,
             @RequestParam("password") String password,
             HttpSession session) {
+        System.out.println("\n\n\nMainController - PostMapping - / login\n\n\n");
         User existingUser = userService.getUserByEmail(email);
         if (existingUser != null && existingUser.getPassword().equals(password)) {
             session.setAttribute("user", existingUser);
-            return "redirect:/index"; 
+            return "redirect:/index";
         } else {
             return "redirect:/login?error";
         }
@@ -90,6 +91,7 @@ public class MainController {
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
+        System.out.println("\n\n\nMainController - RequestMapping - / logout\n\n\n");
         if (session.getAttribute("user") == null) {
             return "redirect:/login";
         }
@@ -104,6 +106,7 @@ public class MainController {
 
     @GetMapping("/signup")
     public String signup(Model model, HttpSession session) {
+        System.out.println("\n\n\nMainController - GetMapping - / signup\n\n\n");
         User user = (User) session.getAttribute("user");
         if (user != null) {
             return "redirect:/index"; // Redirect to the index page if user is already logged in
@@ -117,6 +120,7 @@ public class MainController {
             BindingResult bindingResult,
             Model model,
             HttpSession session) {
+        System.out.println("\n\n\nMainController - PostMapping - / do_register\n\n\n");
         if (user.getEmail().isEmpty()) {
             model.addAttribute("noEmailMessage", message.noFieldProvided("email"));
             return "/auth/signup";
@@ -131,7 +135,18 @@ public class MainController {
             return "/auth/signup";
         }
 
-        System.out.println("main " + user);
+        String uEmail = user.getEmail();
+        User alreadyUser = userService.getUserByEmail(uEmail);
+
+        if (alreadyUser != null) {
+
+            System.out.println("uEmail " + uEmail + "\n" + "alreadyUserEmail " + alreadyUser.getEmail());
+            if (alreadyUser.getEmail().equals(uEmail)) {
+                model.addAttribute("emailAlreadyRegistered", "Email is Already Registered! Try To Login!");
+                return "/auth/signup";
+            }
+        }
+
         userService.insertUser(user);
         session.setAttribute("user", user);
 

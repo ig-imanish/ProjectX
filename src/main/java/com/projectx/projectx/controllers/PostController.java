@@ -1,5 +1,7 @@
 package com.projectx.projectx.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.projectx.projectx.dao.PostRepo;
 import com.projectx.projectx.entities.Post;
 import com.projectx.projectx.entities.User;
 import com.projectx.projectx.services.PostService;
 
-import java.util.Optional;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -25,10 +25,10 @@ public class PostController {
     @Autowired
     PostService postService;
 
-
     // GET endpoint to show the form for creating a new post
     @GetMapping("/create")
     public String showCreatePostForm(Model model) {
+        System.out.println("\n\n\nPostController - GetMapping - / create\n\n\n");
         model.addAttribute("post", new Post());
         return "/posts/post_create"; // Assuming you have a Thymeleaf template named "create-post.html"
     }
@@ -36,6 +36,7 @@ public class PostController {
     @PostMapping("/create")
     public String createPost(@ModelAttribute("post") Post post, RedirectAttributes redirectAttributes,
             HttpSession session) {
+        System.out.println("\n\n\nPostController - PostMapping - / create\n\n\n");
         User user = (User) session.getAttribute("user");
         post.setUser(user);
 
@@ -53,6 +54,7 @@ public class PostController {
 
     @GetMapping("/edit/{id}")
     public String showEditPostForm(@PathVariable("id") Long id, Model model) {
+        System.out.println("\n\n\nPostController - GetMapping - / edit / id\n\n\n");
         Optional<Post> optionalPost = postService.findById(id);
         optionalPost.ifPresent(post -> model.addAttribute("post", post));
         return "/posts/post_edit"; // Assuming you have a Thymeleaf template named "post_edit.html"
@@ -62,6 +64,7 @@ public class PostController {
     public String editPost(@PathVariable("id") Long id, @ModelAttribute("post") Post updatedPost,
             RedirectAttributes redirectAttributes,
             HttpSession session) {
+        System.out.println("\n\n\nPostController - PostMapping - / edit / id\n\n\n");
         // Retrieve the existing post from the database
         Optional<Post> optionalPost = postService.findById(id);
 
@@ -76,9 +79,9 @@ public class PostController {
         return "redirect:/index";
     }
 
-
     @GetMapping("/delete/{id}")
     public String showDeletePostForm(@PathVariable("id") Long id, Model model) {
+        System.out.println("\n\n\nPostController - GetMapping - / delete / id\n\n\n");
         Optional<Post> optionalPost = postService.findById(id);
         optionalPost.ifPresent(post -> model.addAttribute("post", post));
         return "/posts/post_delete"; // Assuming you have a Thymeleaf template named "post_edit.html"
@@ -88,6 +91,7 @@ public class PostController {
     public String deletePost(@PathVariable("id") Long id,
             RedirectAttributes redirectAttributes,
             HttpSession session) {
+        System.out.println("\n\n\nPostController - PostMapping - / delete / id\n\n\n");
         // Retrieve the existing post from the database
         Optional<Post> optionalPost = postService.findById(id);
 

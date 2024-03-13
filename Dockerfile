@@ -1,32 +1,25 @@
-# Stage 1: Build the application
-FROM maven:3.8.4-openjdk-17 AS builder
+# Maven build container 
 
-# Set the working directory in the container
-WORKDIR /app
+FROM maven:3.8.5-openjdk-17 AS maven_build
 
-# Copy the pom.xml file
-COPY pom.xml .
+COPY pom.xml /tmp/
 
-# Download dependencies
-RUN mvn -B dependency:go-offline
+COPY src /tmp/src/
 
-# Copy the source code
-COPY src ./src
+WORKDIR /tmp/
 
-# Build the application
-RUN mvn -B clean package
+RUN mvn package
 
-# Stage 2: Create the final image
-FROM openjdk:17-jdk-alpine
+#pull base image
 
-# Set the working directory in the container
-WORKDIR /app
+FROM eclipse-temurin:11
 
-# Copy the built JAR file from the previous stage
-COPY --from=builder /app/target/ProjectX.jar .
+#expose port 8181
+EXPOSE 8181
 
-# Expose port 8080
-EXPOSE 8080
+#default command
+CMD java -jar /data/ProjectX.jar
 
-# Command to run the application
-CMD ["java", "-jar", "ProjectX.jar"]
+#copy hello world to docker image from builder image
+
+COPY --from=maven_build /tmp/target/ProjectX.jar /data/ProjectX.jar

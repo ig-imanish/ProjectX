@@ -41,7 +41,7 @@ public class MainController {
         User user = (User) session.getAttribute("user");
 
         if (user != null) {
-            return "/auth/index";
+            return "index";
         }
         return "redirect:/login";
     }

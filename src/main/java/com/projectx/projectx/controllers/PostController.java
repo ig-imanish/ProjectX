@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.projectx.projectx.entities.User;
 import com.projectx.projectx.services.PostService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/posts")
@@ -34,11 +36,15 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public String createPost(@ModelAttribute("post") Post post, RedirectAttributes redirectAttributes,
-            HttpSession session) {
+    public String createPost(@Valid @ModelAttribute("post") Post post, RedirectAttributes redirectAttributes,
+            HttpSession session, BindingResult bindingResult) {
         System.out.println("\n\n\nPostController - PostMapping - / create\n\n\n");
         User user = (User) session.getAttribute("user");
         post.setUser(user);
+
+        if (bindingResult.hasErrors()) {
+            return "/posts/post_create";
+        }
 
         // Assuming you have a logged-in user
         if (user != null) {

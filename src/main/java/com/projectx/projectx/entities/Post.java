@@ -19,7 +19,7 @@ public class Post {
     private Long id;
 
     @Lob
-    @Size(max = 5000 , message = "Content length must be less than or equal to 2000 characters")
+    @Size(max = 2000 , message = "Content length must be less than or equal to 2000 characters")
     private String content;
 
     @ManyToOne

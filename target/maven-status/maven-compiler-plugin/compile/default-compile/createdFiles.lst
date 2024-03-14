@@ -1,0 +1,14 @@
+com/projectx/projectx/auth/AuthController.class
+com/projectx/projectx/helpers/Message.class
+com/projectx/projectx/services/UserService.class
+com/projectx/projectx/controllers/MainController.class
+com/projectx/projectx/controllers/PostController.class
+com/projectx/projectx/controllers/UserController.class
+com/projectx/projectx/dao/PostRepo.class
+com/projectx/projectx/entities/User.class
+com/projectx/projectx/ProjectxApplication.class
+com/projectx/projectx/entities/Post.class
+com/projectx/projectx/controllers/MyRestController.class
+com/projectx/projectx/dao/UserRepo.class
+com/projectx/projectx/services/PostService.class
+com/projectx/projectx/helpers/MethodsForGen.class

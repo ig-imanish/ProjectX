@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    background-color: black;
+}
+/* .bannerx {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("https://assets.cntraveller.in/photos/65eb1e304f5a91cb39dbbdde/16:9/w_1600%2Cc_limit/saya%2520leopard%2520kabini.jpg");
+  background-size: cover;
+} */
+
+/* .navbar {
+  border-radius: 10px;
+}
+.card {
+  width: 558px;
+}
+.card img {
+  height: 220px;
+  width: 518px;
+  margin: 20px;
+} */

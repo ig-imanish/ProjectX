@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- <link rel="stylesheet" href="/projectx/src/main/resources/static/css/style.css" th:href="@{/projectx/src/main/resources/static/css/style.css}" /> -->
+
+    <style>
+      .bannerx {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.8)
+          ),
+          url("https://assets.cntraveller.in/photos/65eb1e304f5a91cb39dbbdde/16:9/w_1600%2Cc_limit/saya%2520leopard%2520kabini.jpg");
+        background-size: cover;
+      }
+      .card-title,
+      .card-text,
+      .text-muted,
+      .card-header,
+      .btn {
+        color: rgb(197, 189, 189);
+      }
+      .card {
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body class="bannerx">
+    <div class="container">
+      <!-- Navbar -->
+      <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+      <div class="row">
+        <div class="col">
+          <!-- Check if there are posts available -->
+          <div th:if="${#lists.isEmpty(posts)}">
+            <div class="card mt-4">
+              <div class="card-body">
+                <h5 class="card-title">No posts available</h5>
+                <p class="card-text">Start following users to see posts.</p>
+              </div>
+            </div>
+          </div>
+          <!-- If there are posts, iterate over them -->
+          <div th:unless="${#lists.isEmpty(posts)}">
+            <div th:each="post : ${posts}">
+              <div class="card mt-4 bg-dark">
+                <div class="card-body">
+                  <h5
+                    class="card-header"
+                    th:text="'@' + ${post.user.getNickname()}"
+                  >
+                    User Nickname
+                  </h5>
+                  <h5 class="card-title" th:text="${post.user.getNickname()}">
+                    User Nickname
+                  </h5>
+                  <p class="card-text" th:text="${post.getContent()}">
+                    Post Content
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                  </p>
+                  <!-- Check if the current user is the owner of the post -->
+                  <div th:if="${post.user.email == session.user.email}">
+                    <!-- Edit button -->
+                    <a
+                      th:href="@{'/posts/edit/' + ${post.id}}"
+                      class="btn btn-primary"
+                      >Edit</a
+                    >
+                    <!-- Delete button -->
+                    <a
+                      th:href="@{'/posts/delete/' + ${post.id}}"
+                      class="btn btn-danger"
+                      >Delete</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Check for success message and display it -->
+      <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}"></p>
+      </div>
+    </div>
+
+    <!-- Bootstrap and jQuery scripts -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha384-GDgcgBvmKCUpkXAd3QgSt42Feg6zboz5rJzcqpK9ftDIeBv9LCTdZOCaTxKtsaKg"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

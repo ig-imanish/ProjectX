@@ -1,7 +1,7 @@
 
 # Project Name
 
-Description: [Brief description of your project]
+Description: [ a simple Blog Spring boot project!]
 
 ## Preview
 
@@ -18,37 +18,21 @@ Description: [Brief description of your project]
 ## Installation
 ### Prerequisites
 
-- Java JDK [version]
-- Maven [version]
-- [Any other dependencies]
+- Java JDK [21 version]
+- Maven [3+]
 
 ### Clone
-
 Clone this repository to your local machine using:
 
 ```bash
-git clone https://github.com/your_username/your_project.git
+git clone https://github.com/ig-imanish/ProjectX.git
 ```
 
 ### Setup
 
-1. Navigate to the project directory.
-2. [Any specific instructions for setting up/configuring the project]
-3. [Any other setup steps]
+1. Open project in your IDE
+2. Run the project
 
-## Usage
+## WARNING
 
-1. [Instructions on how to run the project]
-2. [Any additional information about using the project]
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any bugs or feature requests.
-
-## License
-
-This project is licensed under the [License Name] License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgements
-
-[Credit any libraries, resources, or individuals you'd like to acknowledge]
+1. [This is not for commercial purpose, project may contains Bug & Errors]

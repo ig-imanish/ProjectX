@@ -5,9 +5,9 @@ Description: [Brief description of your project]
 
 ## Preview
 
-![Screenshot 1](ss1.png)
-![Screenshot 2](ss2.png)
-![Screenshot 3](ss3.png)
+![Screenshot 1](preview-img-vdo/ss1.png)
+![Screenshot 2](preview-img-vdo/ss2.png)
+![Screenshot 3](preview-img-vdo/ss3.png)
 
 ## Features
 

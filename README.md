@@ -5,9 +5,9 @@ Description: [Brief description of your project]
 
 ## Preview
 
-![Screenshot 1](preview-img-vdo/Screencast from 2024-03-15 17-23-56.webm.jpg)
-![Screenshot 2](link_to_screenshot2.jpg)
-[Video Preview](preview-img-vdo/Screencast from 2024-03-15 17-23-56.webm)
+![Screenshot 1](ss1.png)
+![Screenshot 2](ss2.png)
+![Screenshot 3](ss3.png)
 
 ## Features
 

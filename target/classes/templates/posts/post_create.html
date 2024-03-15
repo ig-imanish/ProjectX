@@ -30,21 +30,18 @@
       <div class="row">
         <div class="col">
           <!-- Post Form -->
-          <form method="post" th:action="@{/posts/create}" th:object="${post}">
+          <!-- Post Form -->
+          <form method="post" th:action="@{/posts/create}">
             <div class="mb-3">
               <label for="content" class="form-label">Post Content</label>
               <textarea
                 class="form-control"
                 id="content"
-                th:field="*{content}"
                 rows="3"
                 required
               ></textarea>
-              <p
-                th:if="${#fields.hasErrors('content')}"
-                class="text-danger"
-                th:errors="*{content}"
-              ></p>
+              <!-- Display error message if content exceeds max length -->
+              <p class="text-danger"></p>
             </div>
             <button type="submit" class="btn btn-primary">Create Post</button>
           </form>

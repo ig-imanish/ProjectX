@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,11 @@ public class PostController {
         post.setUser(user);
 
         if (bindingResult.hasErrors()) {
+            System.out.println("Validation errors occurred:");
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                System.out.println("- Field: " + error.getField() + ", Message: " + error.getDefaultMessage());
+            }
+
             return "/posts/post_create";
         }
 

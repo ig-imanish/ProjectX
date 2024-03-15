@@ -19,7 +19,7 @@ public class Post {
     private Long id;
 
     @Lob
-    @Size(max = 2000 , message = "Content length must be less than or equal to 2000 characters")
+    @Size(max = 2000, message = "Content length must be less than or equal to 2000 characters")
     private String content;
 
     @ManyToOne
@@ -39,7 +39,9 @@ public class Post {
     }
 
     public void setContent(String content) {
-        this.content = content;
+        if (content != null && !content.isEmpty()) {
+            this.content = content;
+        }
     }
 
     public User getUser() {
@@ -55,8 +57,8 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post [id=" + id + ", content length=" + content.length() + ", user=" + user + "]";
+        int length = (content != null) ? content.length() : 0;
+        return "Post [id=" + id + ", content length=" + length + ", user=" + user + "]";
     }
 
-    
 }

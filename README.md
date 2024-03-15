@@ -11,12 +11,11 @@ Description: [Brief description of your project]
 
 ## Features
 
-- [Feature 1]
-- [Feature 2]
-- ...
+- [Auth - Login , SignUp]
+- [Post - edit , create , delete]
+- [profile]
 
 ## Installation
-
 ### Prerequisites
 
 - Java JDK [version]
